@@ -1,0 +1,61 @@
+<div>
+
+<h1> Add Book</h1>
+<label>Name :</label>
+<input type="text" name="bookName" ng-model="bookname">
+<label>Author :</label>
+<input type="text" name="bookAuthor" ng-model="bookauthor">
+
+<button ng-click="addBook()"> Submit</button>
+<table>
+<th > Book Name</th>
+<th>Author</th>
+<th> Status </th>
+<tr ng-repeat="data in bookDetails">
+<td> {{data.Name}}</td>
+
+<td> {{data.Author}}</td>
+<td>{{data.Status}} </td>
+<td> <button ng-click="deleteBook(data._id)">Delete</button> </td>
+</tr>
+</table>
+
+<button ng-click="showIssue('issueBook')">Show Issued</button>
+<button ng-click="showIssue('returnBook')">Show Return</button>
+</div>
+
+<div ng-include="template"></div>
+
+<script type="text/ng-template" id="issueBook">
+<div>
+<h1>Issue Book </h1>
+<select ng-model="$parent.author" 
+        ng-options="item._id as item.Name for item in bookDetails">
+    <option value="">Select Book</option>
+</select>
+<select ng-model="$parent.user" 
+        ng-options="item._id as item.name for item in userDetail">
+    <option value="">Select User</option>
+</select>
+<button ng-click="issueBook()">Issue book</button>
+</div>
+</script>
+
+<script type="text/ng-template" id="returnBook">
+<div>
+<h1>Return Book </h1>
+<select ng-model="$parent.userid" 
+        ng-options="item._id as item.name for item in userDetail" ng-change="getuserBooks()">
+    <option value="">Select User</option>
+</select>
+
+<select ng-model="$parent.booksid" ng-show="showBookList"
+        ng-options="item._id as item.book_id.Name for item in userbookdetail" >
+        {{item}}
+    <option value="">Books Taken</option>
+</select>
+
+<button ng-click="returnBook()">Return book</button>
+</div>
+</script>
+

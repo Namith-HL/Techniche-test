@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "cms_user"
+AuthUserFile "/home/devfsi5/.htpasswds/public_html/cms.commercio/passwd"
+require valid-user
